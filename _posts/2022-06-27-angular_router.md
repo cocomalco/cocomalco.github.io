@@ -38,7 +38,7 @@ SEO(검색 엔진 최적화)
 웹페이지가 각각 100개씩 있는 페이지는 검색 봇이 페이지를 읽을 수 있다.
 하지만, 페이지는 1개이고 필요한 부분만 JavaScript로 바꿔진 경우 검색봇이 페이지를 읽을 수 없게 된다.
 
-ROUTING
+### ROUTING
 출발지에서 목적지까지의 경로를 결정하는 기능 , SPA(single page Application)를 위한 클라이언트 사이드 네비게이션으로, URL과 컴포넌트의 쌍으로 라우트 설정을 참고 하여 , 뷰를 렌더링 합니다. 라우터를 사용하여 화면 전환을 하려면 component가 2개 이상 존재해야 한다.
 
 ### 기본 라우팅 규칙 
@@ -49,29 +49,13 @@ Angular CLI로 앱을 생성했다면 , 해당 과정이 처리 완료, 앱을 �
 ### 라우터 설정
 
 1. app.component.html에 router-outlet 추가
-```javascript
+ ~~~
 <router-outlet></router-outlet>
-```
+ ~~~
+
 2. app-routing-modules.ts 파일에 path와 전환될 component를  설정
-```javascript
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { CustComponent } from './cust/cust.component';
-
-const routes: Routes = [
-  {path:'HOME',component:HomeComponent}
- ,{path:'CUST',component:CustComponent}
- ,{path:'', redirectTo:'/HOME',pathMatch:'full'}//redirect
- ,{path:'**',component:NotFoundComponent}//와일드카드 라우팅
-];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
-```
+[app-routing.modules.ts]
+<script src="https://gist.github.com/cocomalco/54b65e8ccf6a364db84d84d8e3df53e8.js"></script>
 
 
   | 요청한 URL 경로 | URL | 활성화될 컴포넌트 |
@@ -84,34 +68,21 @@ export class AppRoutingModule { }
 
 3. 화면전환
 - HTML에서 Router Link를 이용하여 화면전환하는 방법
-```javascript
+~~~
  <a routerLink="HOME">HOME</a>
  <a routerLink="CUST">CUST</a>
-```
+~~~
 -  Component 에서 Router.navigationByUrl를 이용 하는 방법
-```javascript
-import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
-@Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
-})
-export class HomeComponent implements OnInit {
-  constructor(private router:Router) {
-    }
-     ngOnInit(): void {
-      this.router.navigateByUrl('/CUST/');
-    }
-}
-```
+[component.ts]
+<script src="https://gist.github.com/cocomalco/1fdefa93b9ecaf96bbc4479309abb8d3.js"></script>
 
 ### 중첩라우터
 특정 컴포넌트 안에서 동작하는 라우팅이며 ,자식 라우팅(child routing) 이라고 한다.
 
 중첩라우터  설정  
-1. 부모 html에 자식<router-outlet></router-outlet>와 Router Link 추가
-```javascript
+1. 부모 html에 자식 페이지가 렌더링 될 자리에 router-outlet 태그 추가, 자식 페이지가 렌더링 될수있도록 routerLink 태그 추가
+[예시]
+~~~ 
 <p>HOME TEST</p>
 <ul>
   <li>
@@ -125,7 +96,7 @@ export class HomeComponent implements OnInit {
   </li>
 </ul>
 <router-outlet></router-outlet>
-```
+~~~ 
 2.  app-routing-modules.ts 파일에 부모 router 하위에 자식 router를 설정
 ```javascript
 const routes: Routes = [

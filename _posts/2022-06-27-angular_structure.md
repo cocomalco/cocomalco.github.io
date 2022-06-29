@@ -74,8 +74,6 @@ Angular가 제공하는 디렉티브는 크게 어트리뷰트 디렉티브와 �
 #명령어 실행후 , 자동으로 app.module.ts에 import되며, declaration에 추가됨
 $ng generate directive 파일명
 
-<br/>
-
 5. Pipe  
 데이터를 원하는 형태로 변환, 출력데이터에 대해서 추가적인 처리를 한후에 화면에 출력할수있도록 하며, 화면에 표시하는 형식만 변경하고 싶을때 사용한다.  
 기본적으로 앵귤러에서 제공하는 Built-in 파이프와 custom pipe 가있다.  

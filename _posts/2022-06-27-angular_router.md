@@ -65,14 +65,15 @@ Route 인터페이스 배열을 이용하여 path와 전환될 component를 설�
   [app-routing.modules.ts]  
   <script src="https://gist.github.com/cocomalco/54b65e8ccf6a364db84d84d8e3df53e8.js"></script>
   | 요청한 URL 경로 | URL | 활성화될 컴포넌트 |
-  |:--------:|:----:|:----:|
+  |:--------:|:--------:|:--------:|
   | HOME |localhost:4200/HOME|HomeComponent|
   | CUST |localhost:4200/CUST|CustComponent|
   |  |localhost:4200/|HomeComponent|
   | unkown |localhost:4200/~ |NotFoundComponent|
 
 2. 뷰의 렌더링 위치 지정
-라우트될 뷰의 위치를 지정 하여 RouterOutlet 추가, RouterOutlet은 라우터가 컴포넌트를 렌더링 하여 뷰를 표시할 영역인 router-outlet을 구현한 디렉티브로 컴포엉트의 뷰를 렌더링할 위치를 설정
+라우트될 뷰의 위치를 지정 하여 RouterOutlet 추가, RouterOutlet은 라우터가 컴포넌트를 렌더링 하여 뷰를 표시할 영역인 router-outlet을 구현한 디렉티브로 컴포엉트의 뷰를 렌더링할 위치를 설정  
+
 ```javascript
 <router-outlet></router-outlet>
 ```

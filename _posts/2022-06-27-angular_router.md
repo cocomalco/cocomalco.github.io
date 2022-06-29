@@ -16,8 +16,6 @@ last_modified_at: 2022-06-27
 
 ---
 
-## ANGULAR ROUTER
-
 ### 개념  
 SPA
 단일 페이지 어플리케이션 (Single page Application)의약자.
@@ -39,25 +37,33 @@ SEO(검색 엔진 최적화)
 하지만, 페이지는 1개이고 필요한 부분만 JavaScript로 바꿔진 경우 검색봇이 페이지를 읽을 수 없게 된다.
 
 ### ROUTING
-출발지에서 목적지까지의 경로를 결정하는 기능 , SPA(single page Application)를 위한 클라이언트 사이드 네비게이션으로, URL과 컴포넌트의 쌍으로 라우트 설정을 참고 하여 , 뷰를 렌더링 합니다. 라우터를 사용하여 화면 전환을 하려면 component가 2개 이상 존재해야 한다.
+출발지에서 목적지까지의 경로를 결정하는 기능 , SPA(single page Application)를 위한 클라이언트 사이드 네비게이션으로, URL과 컴포넌트의 쌍으로 라우트 설정을 참고 하여 , 뷰를 렌더링 한다.
+본래 라우팅시 URL 을 변경하여 다른 페이지로 넘어가는 방식과 다르게 AJAX 요청에 의해 서버로부터 받은 데이터를 반다 화면을 생성 하는 경우에는  URL이 변경되지 않아, SEO 문제가 야기된다.
+라우터를 사용하여 화면 전환을 하려면 component가 2개 이상 존재해야 한다.
+
+### 위치정책
+SPA 이기 때문에 새로고침시 첫페이지가 로드되며 , URL이 변경되지않아 SEO 문제를 해결하기 위해 2가지 정책을 제시한다.
+
+pathLocationStrategy
+HTML5 History API pushState 메서드 를 사용하는 정책으로 Angular 라우터의 기본 정책.
+
+HashLocationStraregy
+해시 URL 스타일을 사용.
 
 ### 기본 라우팅 규칙 
 AppModule 이 정의된 파일에 AppRoutingModule을 로드하고 , 이 라우팅 모듈을 AppModule import에 추가.
 Angular CLI로 앱을 생성했다면 , 해당 과정이 처리 완료, 앱을 직정 작성하거나,이미 있는앱기반으로 작업 한다면 규칙을 확인 해야 한다.
 
 
+
 ### 라우터 설정
 
-1. app.component.html에 router-outlet 추가
- ~~~
-<router-outlet></router-outlet>
- ~~~
-
-2. app-routing-modules.ts 파일에 path와 전환될 component를  설정
-[app-routing.modules.ts]
-<script src="https://gist.github.com/cocomalco/54b65e8ccf6a364db84d84d8e3df53e8.js"></script>
 
 
+1. 라우트 구성및 등록
+Route 인터페이스 배열을 이용하여 path와 전환될 component를 설정  
+  [app-routing.modules.ts]  
+  <script src="https://gist.github.com/cocomalco/54b65e8ccf6a364db84d84d8e3df53e8.js"></script>
   | 요청한 URL 경로 | URL | 활성화될 컴포넌트 |
   |:--------:|:----:|:----:|
   | HOME |localhost:4200/HOME|HomeComponent|
@@ -65,14 +71,25 @@ Angular CLI로 앱을 생성했다면 , 해당 과정이 처리 완료, 앱을 �
   |  |localhost:4200/|HomeComponent|
   | unkown |localhost:4200/~ |NotFoundComponent|
 
+2. 뷰의 렌더링 위치 지정
+라우트될 뷰의 위치를 지정 하여 RouterOutlet 추가, RouterOutlet은 라우터가 컴포넌트를 렌더링 하여 뷰를 표시할 영역인 router-outlet을 구현한 디렉티브로 컴포엉트의 뷰를 렌더링할 위치를 설정
+```javascript
+<router-outlet></router-outlet>
+```
 
-3. 화면전환
-- HTML에서 Router Link를 이용하여 화면전환하는 방법
-~~~
+3. 네비게이션 작설
+- Router Link 디렉티브를 사용하는 방법
+```javascript
  <a routerLink="HOME">HOME</a>
  <a routerLink="CUST">CUST</a>
-~~~
--  Component 에서 Router.navigationByUrl를 이용 하는 방법
+```
+RouterLink 디렉티브는 자신의 값을 라우터에게 전달하고 , 라우터는 이를 전달 받아 해당 컴포넌트를 활성화하여 뷰를 렌더링.
+
+-RouterLinkActive를 사용하는 방법
+RouterLinkActive는 현제 브라우저의 경로가 RoutrLink 디렉티브에서 지정한 URL 경로의 '트리'에 포함되는 경우 RouterLinkActive 클래스명을 DOM에 자동 추가한다.
+즉, router 활성화시 RouterLinkActive에 저의 되어있는 클래스 속성을 DOM엑추가 해주는 디렉티브 
+
+- native 메서드를 이용하는 방법
 [component.ts]
 <script src="https://gist.github.com/cocomalco/1fdefa93b9ecaf96bbc4479309abb8d3.js"></script>
 
@@ -82,7 +99,7 @@ Angular CLI로 앱을 생성했다면 , 해당 과정이 처리 완료, 앱을 �
 중첩라우터  설정  
 1. 부모 html에 자식 페이지가 렌더링 될 자리에 router-outlet 태그 추가, 자식 페이지가 렌더링 될수있도록 routerLink 태그 추가
 [예시]
-~~~ 
+```javascript
 <p>HOME TEST</p>
 <ul>
   <li>
@@ -96,7 +113,7 @@ Angular CLI로 앱을 생성했다면 , 해당 과정이 처리 완료, 앱을 �
   </li>
 </ul>
 <router-outlet></router-outlet>
-~~~ 
+```
 2.  app-routing-modules.ts 파일에 부모 router 하위에 자식 router를 설정
 ```javascript
 const routes: Routes = [

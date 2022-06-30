@@ -79,38 +79,9 @@ $ng generate directive 파일명
 기본적으로 앵귤러에서 제공하는 Built-in 파이프와 custom pipe 가있다.  
 기본 제공하는 파이프  : https://angular.io/guide/pipes  
 Built-in pipe 예제  
+
 component에 사용할 변수
-```javascript
-import { Component, OnInit } from '@angular/core';
+<script src="https://gist.github.com/cocomalco/b6e017fdbe8219f18085713934534fc9.js"></script>
 
-@Component({
-  selector: 'app-child-a',
-  templateUrl: './child-a.component.html',
-  styleUrls: ['./child-a.component.css']
-})
-
-
-export class ChildAComponent implements OnInit {
-
-  book={
-    "title" : "Wallace and Grommit"
-    ,"stock": 1234567891231
-    ,"star" : 4.2356265656
-    ,"price":12000
-    ,"publicDate" :new Date()
-  }
-
-  ngOnInit(): void {
-  }
-
-}
-```
 html 파일에서 ts 파일에 선언된 변수 파이프를 통해 사용
-```HTML
-<p>LIBRARY</p>
-<div>title : {{book.title}}</div>
-<div>stock : {{book.stock | number}}</div>
-<div>star : {{book.star | number:'1.3-3'}}</div>
-<div>price : {{book.price | currency:'KRW'}}</div>
-<div>publicDate : {{book.publicDate| date:'y년 MM월 dd일'}}</div>
-```
+<script src="https://gist.github.com/cocomalco/d149a60fe58e565c8170c8a6893b1163.js"></script>

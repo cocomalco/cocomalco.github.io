@@ -54,25 +54,22 @@ ngModule 은 외부 라이브러리 개념의 디렉토리 이기때문에 설�
 app.Modules.ts 에 FormModules 를 import 에 추가 해준다.
 <script src="https://gist.github.com/cocomalco/54883e37ac51f7231f93e1f5fe1ebf2b.js"></script>
 사용하고자 하는 곳에 '[(ngModule)]=<아이디값>'을 선언해준다
-
-
-
-
 {% highlight java linenos%}
-<div class="jb-box main">
-  <video muted autoplay loop>
-    <source src="assets/video/background.mp4" type="video/mp4">
-    <strong>Your browser does not support the video tag.</strong>
-  </video>
-  <div class="jb-text">
-    <p>한 번의 클릭으로 화상상담을 이용하세요.</p>
-    <p style="font-size: 40px;   font-weight: 900;">CXPERT VIDEO</p>
-    <div>
-      <!-- <input type="text" [formControl]="clientIdForm" id="client_ani"  placeholder="핸드폰 번호를 입력 해주세요."> -->
-        <input type="text" [(ngModel)]="client_ani">
-        <!-- <button (click)="submit()">SUBMIT</button> -->
-    </div>
-
-  </div>
-</div>
+  <input type="text" [(ngModel)]="client_ani">
 {%endhighlight%}
+
+component에 변수 선언
+{% highlight java linenos%}
+export class HomeComponent implements OnInit {
+  private formControl = new FormControl;
+  public client_ani: string;
+
+  constructor(public formBuilder:FormBuilder) {
+    this.client_ani = '';
+
+  }
+  ngOnInit(): void {
+console.log("client ani : ",this.client_ani);
+
+  }
+  {%endhighlight%}

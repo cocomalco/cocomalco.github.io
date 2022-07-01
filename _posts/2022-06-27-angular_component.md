@@ -51,25 +51,24 @@ NgModule의 메타데이터
 ### 데이터 바인딩
 1. ngModule 디렉티브 사용
 ngModule 은 외부 라이브러리 개념의 디렉토리 이기때문에 설정을 필요로 한다.
-app.Modules.ts 에 FormModules 를 import 에 추가 해준다.
+app.Modules.ts 에 FormModules 와  ReactiveFormsModule 를 import 에 추가 해준다.
 <script src="https://gist.github.com/cocomalco/54883e37ac51f7231f93e1f5fe1ebf2b.js"></script>
 사용하고자 하는 곳에 '[(ngModule)]=<아이디값>'을 선언해준다
 {% highlight java linenos%}
-  <input type="text" [(ngModel)]="client_ani">
+  <input type="text"  [(ngModel)]="client_ani">
 {%endhighlight%}
 
 component에 변수 선언
 {% highlight java linenos%}
 export class HomeComponent implements OnInit {
-  private formControl = new FormControl;
   public client_ani: string;
 
-  constructor(public formBuilder:FormBuilder) {
+  constructor() {
     this.client_ani = '';
 
   }
   ngOnInit(): void {
-console.log("client ani : ",this.client_ani);
-
+    console.log("client ani : ",this.client_ani);
   }
+}
   {%endhighlight%}

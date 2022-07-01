@@ -142,61 +142,57 @@ const routes: Routes = [
 (routerLink 를 통해 값을 전달 하고자 한다면 , router  생성시 (기본 파일 :app-routing.modules.app) path 설정부분에 파라미터 값취득 설정 필요)
   -  routerLink 에 호출 주소와 파라미터를 넣어 컴포넌트에 전달 , UR은 http://localhost:4200/CUST/test/test_id 이다.
 {% highlight java linenos%}
-      <a routerLink=“/CUST/test/test_id”>parameterTest</a> 
+<a routerLink=“/CUST/test/test_id”>parameterTest</a> 
 {% highlight java linenos%}
  
   - component에 생성한 값을 사용하여 파라미터값 사용 하며 실제 사용되는 URL 은 http://localhost:4200/CUST/test/test_id 이다.
 {% highlight java linenos%}
-    <a routerLink="/CUST/{{user_idx}}/{{menu_temp_idx}}">parameterTest</a>
+<a routerLink="/CUST/{{user_idx}}/{{menu_temp_idx}}">parameterTest</a>
 {%endhighlight%}
   - routerLink의 state를 통해 전달하는 방법
     .ts 파일
 {% highlight java linenos%}
-    import { Component, OnInit} from '@angular/core';
-    import { Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+@Component({
+selector: 'app-home'
+,templateUrl: './home.component.html'
+,styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+title="CUST_TEST";
+title02="CUST_TEST02";
+user_idx ="test";
+menu_temp_idx ="depth02";
+constructor(private router:Router) {}
+ngOnInit(): void {}
+}
+{%endhighlight%}
 
-
-    @Component({
-      selector: 'app-home'
-      ,templateUrl: './home.component.html'
-      ,styleUrls: ['./home.component.css']
-      })
-
-      export class HomeComponent implements OnInit {
-        title="CUST_TEST";
-        title02="CUST_TEST02";
-        user_idx ="test";
-        menu_temp_idx ="depth02";
-        constructor(private router:Router) {}
-        ngOnInit(): void {}
-        }
-  {%endhighlight%}
-    HTML
+HTML
 {% highlight java linenos%}
-    <a [title]="title02" [routerLink]="['/CUST',user_idx ,menu_temp_idx]">{{title}}</a>
-  {%endhighlight%}
+<a [title]="title02" [routerLink]="['/CUST',user_idx ,menu_temp_idx]">{{title}}</a>
+{%endhighlight%}
+
 - router.navigateByUrl를 통해 전달하는 방법
 {% highlight java linenos%}
-    this.router.navigateByUrl('/CUST/{$user_idx}/{$menu_temp_idx}');
-  {%endhighlight%}
+this.router.navigateByUrl('/CUST/{$user_idx}/{$menu_temp_idx}');
+{%endhighlight%}
 
-
- 2. 파라미터 취득  
- routerLink 영역에 렌더링 된 컴포넌트는 ActivatedRouter 객체를 통해 라우터 상태(router state)에 접근하여, 옵저버블로 취득한다.  
- Activited Route property  
+2. 파라미터 취득  
+routerLink 영역에 렌더링 된 컴포넌트는 ActivatedRouter 객체를 통해 라우터 상태(router state)에 접근하여, 옵저버블로 취득한다.  
+Activited Route property  
  
-    | 프로퍼티 | 설명 |
-    |:--------:|:----|
-    | URL |라우팅경로를 Observable 타입으로 표현, 이 프로퍼티를 참조하면 라우팅 경로를 구성하는 각 문자열을 배열 형태로 확인 가능|
-    |Data|라우팅 규칙에 data 객체가 지정이 되었을떄 이  데이터를 Observable 타입으로 표현, 이 객체에는 라우터 가드에서 처리된 내용 포함|
-    |paramMap|라우팅 규칙에 정의된 라우팅 변수를 map 타입의 Observable로 표현, 맵을 사용하면 라우팅 규칙에 포함된 라우팅 인자 전부를 취득 가능| 
-    |queryParamMap|라우팅 규칙에서 접근할수있는 모든 쿼리변수를 map 타입의 Observable로 표현 , 맵을 사용하면 라우팅 규칙에 포함된 쿼리 변수전부를 취득 가능
-    |fragment|모든 라우팅 규칙에 포함된 URL조각을 Observable 형태로 표현.| 
-    |outlet|라우팅 영역으로 사용되는 RouterOutlet을 지정할떄 사용, 라우팅영역에 이름을 지정하지않으면 primary가 기본 이름으로 지정됨.|
-    |routeConfig|현재 라우팅된 규칙의 설정을 표현, 이 객체에는  URL 주소에 대한 정보포함.|
-    |parent|현재 러우탕 된것이 자식 라우팅 규칙이라면 , 이 라우팅 규칙의 부모 ActivitedRoute를 표현.| 
-    |firstChild|현재 라우팅된 규칙의 자식 라우팅 규칙중 첫번쨰 ActivitedRoute를 표현| 
-    |children|현재 활성된 라우팅 규칙에 있는 모든 자식 라우팅 규칙을 표현.|
-
-  <script src="https://gist.github.com/cocomalco/19db4b869dd4885962ff76ecf73e8913.js"></script>
+| 프로퍼티 | 설명 |
+|:--------:|:----|
+| URL |라우팅경로를 Observable 타입으로 표현, 이 프로퍼티를 참조하면 라우팅 경로를 구성하는 각 문자열을 배열 형태로 확인 가능|
+|Data|라우팅 규칙에 data 객체가 지정이 되었을떄 이  데이터를 Observable 타입으로 표현, 이 객체에는 라우터 가드에서 처리된 내용 포함|
+|paramMap|라우팅 규칙에 정의된 라우팅 변수를 map 타입의 Observable로 표현, 맵을 사용하면 라우팅 규칙에 포함된 라우팅 인자 전부를 취득 가능| 
+|queryParamMap|라우팅 규칙에서 접근할수있는 모든 쿼리변수를 map 타입의 Observable로 표현 , 맵을 사용하면 라우팅 규칙에 포함된 쿼리 변수전부를 취득 가능
+|fragment|모든 라우팅 규칙에 포함된 URL조각을 Observable 형태로 표현.| 
+|outlet|라우팅 영역으로 사용되는 RouterOutlet을 지정할떄 사용, 라우팅영역에 이름을 지정하지않으면 primary가 기본 이름으로 지정됨.|
+|routeConfig|현재 라우팅된 규칙의 설정을 표현, 이 객체에는  URL 주소에 대한 정보포함.|
+|parent|현재 러우탕 된것이 자식 라우팅 규칙이라면 , 이 라우팅 규칙의 부모 ActivitedRoute를 표현.| 
+|firstChild|현재 라우팅된 규칙의 자식 라우팅 규칙중 첫번쨰 ActivitedRoute를 표현| 
+|children|현재 활성된 라우팅 규칙에 있는 모든 자식 라우팅 규칙을 표현.|
   

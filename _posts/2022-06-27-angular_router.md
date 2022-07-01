@@ -64,6 +64,7 @@ Angular CLI로 앱을 생성했다면 , 해당 과정이 처리 완료, 앱을 �
 Route 인터페이스 배열을 이용하여 path와 전환될 component를 설정  
   [app-routing.modules.ts]  
   <script src="https://gist.github.com/cocomalco/54b65e8ccf6a364db84d84d8e3df53e8.js"></script>
+
   | 요청한 URL 경로 | URL | 활성화될 컴포넌트 |
   |:--------:|:--------:|:--------:|
   | HOME |localhost:4200/HOME|HomeComponent|
@@ -74,16 +75,16 @@ Route 인터페이스 배열을 이용하여 path와 전환될 component를 설�
 2. 뷰의 렌더링 위치 지정
 라우트될 뷰의 위치를 지정 하여 RouterOutlet 추가, RouterOutlet은 라우터가 컴포넌트를 렌더링 하여 뷰를 표시할 영역인 router-outlet을 구현한 디렉티브로 컴포엉트의 뷰를 렌더링할 위치를 설정  
 
-```javascript
+{% highlight java linenos%}
 <router-outlet></router-outlet>
-```
+{%endhighlight%}
 
 3. 네비게이션 작설
 - Router Link 디렉티브를 사용하는 방법
-```javascript
+{% highlight java linenos%}
  <a routerLink="HOME">HOME</a>
  <a routerLink="CUST">CUST</a>
-```
+{%endhighlight%}
 RouterLink 디렉티브는 자신의 값을 라우터에게 전달하고 , 라우터는 이를 전달 받아 해당 컴포넌트를 활성화하여 뷰를 렌더링.
 
 -RouterLinkActive를 사용하는 방법
@@ -100,7 +101,7 @@ RouterLinkActive는 현제 브라우저의 경로가 RoutrLink 디렉티브에�
 중첩라우터  설정  
 1. 부모 html에 자식 페이지가 렌더링 될 자리에 router-outlet 태그 추가, 자식 페이지가 렌더링 될수있도록 routerLink 태그 추가
 [예시]
-```javascript
+{% highlight java linenos%}
 <p>HOME TEST</p>
 <ul>
   <li>
@@ -114,9 +115,9 @@ RouterLinkActive는 현제 브라우저의 경로가 RoutrLink 디렉티브에�
   </li>
 </ul>
 <router-outlet></router-outlet>
-```
+{%endhighlight%}
 2.  app-routing-modules.ts 파일에 부모 router 하위에 자식 router를 설정
-```javascript
+{% highlight java linenos%}
 const routes: Routes = [
   {path:'HOME',component:HomeComponent 
     , children:[
@@ -128,7 +129,7 @@ const routes: Routes = [
 ,{path:'', redirectTo:'/HOME',pathMatch:'full'}
 ,{path:'**',component:NotFoundComponent}
 ];
-```
+{% highlight java linenos%}
 ### Router를 통한 파라미터 참조
  1. 파라미터 전달
 - 브라우저 URL을 통해 파라미터 전달하는 방법
@@ -137,17 +138,17 @@ const routes: Routes = [
 - routerLink 를 통해 전달하는 방법  
 (routerLink 를 통해 값을 전달 하고자 한다면 , router  생성시 (기본 파일 :app-routing.modules.app) path 설정부분에 파라미터 값취득 설정 필요)
   -  routerLink 에 호출 주소와 파라미터를 넣어 컴포넌트에 전달 , UR은 http://localhost:4200/CUST/test/test_id 이다.
-     ```javascript
+{% highlight java linenos%}
       <a routerLink=“/CUST/test/test_id”>parameterTest</a> 
-      ```
+{% highlight java linenos%}
  
   - component에 생성한 값을 사용하여 파라미터값 사용 하며 실제 사용되는 URL 은 http://localhost:4200/CUST/test/test_id 이다.
-    ```javascript
-    <a routerLink="/CUST/{{user_idx}}/{{menu_temp_idx}}">parameterTest</a> 
-    ```
+{% highlight java linenos%}
+    <a routerLink="/CUST/{{user_idx}}/{{menu_temp_idx}}">parameterTest</a>
+{%endhighlight%}
   - routerLink의 state를 통해 전달하는 방법
     .ts 파일
-    ```javascript
+{% highlight java linenos%}
     import { Component, OnInit} from '@angular/core';
     import { Router } from '@angular/router';
 
@@ -166,15 +167,15 @@ const routes: Routes = [
         constructor(private router:Router) {}
         ngOnInit(): void {}
         }
-    ```
+  {%endhighlight%}
     HTML
-    ```javascript
+{% highlight java linenos%}
     <a [title]="title02" [routerLink]="['/CUST',user_idx ,menu_temp_idx]">{{title}}</a>
-    ```
+  {%endhighlight%}
 - router.navigateByUrl를 통해 전달하는 방법
-  ```javascript
+{% highlight java linenos%}
     this.router.navigateByUrl('/CUST/{$user_idx}/{$menu_temp_idx}');
-  ```
+  {%endhighlight%}
 
 
  2. 파라미터 취득  

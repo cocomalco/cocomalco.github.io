@@ -104,32 +104,35 @@ RouterLinkActive는 현제 브라우저의 경로가 RoutrLink 디렉티브에�
 {% highlight java linenos%}
 <p>HOME TEST</p>
 <ul>
-  <li>
-    <a routerLink="CHILD-A">CHILD-A</a>
-  </li>
-  <li>
-    <a routerLink="CHILD-B">CHILD-B</a>
-  </li>
-  <li>
-    <a routerLink="CHILD-C">CHILD-C</a>
-  </li>
+<li>
+<a routerLink="CHILD-A">CHILD-A</a>
+</li>
+<li>
+<a routerLink="CHILD-B">CHILD-B</a>
+</li>
+<li>
+<a routerLink="CHILD-C">CHILD-C</a>
+</li>
 </ul>
 <router-outlet></router-outlet>
 {%endhighlight%}
-2.  app-routing-modules.ts 파일에 부모 router 하위에 자식 router를 설정
+
+2.  app-routing-modules.ts 파일에 부모 router 하위에 자식 router를 설정\
+
 {% highlight java linenos%}
 const routes: Routes = [
-  {path:'HOME',component:HomeComponent 
-    , children:[
-     {path:'CHILD-A',component:ChildAComponent} //자식 라우팅과 연결되는 주소
-    ,{path:'CHILD-B',component:ChildBComponent}
-    ,{path:'CHILD-C',component:ChildCComponent}]
-  }
+{path:'HOME',component:HomeComponent 
+, children:[
+{path:'CHILD-A',component:ChildAComponent} //자식 라우팅과 연결되는 주소
+,{path:'CHILD-B',component:ChildBComponent}
+,{path:'CHILD-C',component:ChildCComponent}]
+}
 ,{path:'CUST',component:CustComponent}
 ,{path:'', redirectTo:'/HOME',pathMatch:'full'}
 ,{path:'**',component:NotFoundComponent}
 ];
 {% highlight java linenos%}
+
 ### Router를 통한 파라미터 참조
  1. 파라미터 전달
 - 브라우저 URL을 통해 파라미터 전달하는 방법

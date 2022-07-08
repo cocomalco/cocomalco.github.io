@@ -50,7 +50,7 @@ NgModule의 메타데이터
 
 ### 데이터 바인딩
 1. ngModule 디렉티브 사용
-ngModule 은 외부 라이브러리 개념의 디렉토리 이기때문에 설정을 필요로 한다.
+ngModule 은 외부 라이브러리 개념의 디렉토리 이기때문에 설정을 필요로 한다.  
 app.Modules.ts 에 FormModules 와  ReactiveFormsModule 를 import 에 추가 해준다.
 <script src="https://gist.github.com/cocomalco/54883e37ac51f7231f93e1f5fe1ebf2b.js"></script>
 사용하고자 하는 곳에 '[(ngModule)]=<아이디값>'을 선언해준다
@@ -72,3 +72,37 @@ export class HomeComponent implements OnInit {
   }
 }
   {%endhighlight%}
+
+
+
+##상위 컴포넌트와 하위 컴포넌트간의 데이터 전달  
+@INPUT 데코레이터는 '받는' 역활을한다.  
+보내고자 하는 부분에 [하위컴포넌트 변수] = '보낼값' 으로 전달 해주며 , 하의 컨포넌트는 input 데코레이터를 통해 값을 받아 사용 한다.
+ 
+ 예시
+
+ [상위 컴포넌트 HTML 파일]
+ {% highlight java linenos%}
+    <app-login [longinPop]='true'></app-login>
+  {%endhighlight%}
+
+   [하위 컴포넌트 ts 파일]
+ {% highlight java linenos%}
+    @Input() longinPop :boolean = false;
+  {%endhighlight%}
+
+@OUTPUT 데코레이터는 '주는' 역활을 한다.
+보내고자 하는 부분에 EventEmitter 를 통해서 이벤트나 값을 전달 하며 ,  (sendEvent) 을 이용하여 OUTPUT 데코레이터 값을 받는다.
+
+예시 
+상황 : 하위 컴포넌트에서 상위 컴포넌트로 데이터 전달.
+EventEmitter import , OUTPUT 뎈토레이터 선언 , 이벤트 emit
+[하위 컴포넌트 ts 파일]
+<script src="https://gist.github.com/cocomalco/7f40726640cdbf187b5c6903826f052d.js"></script>
+
+[상위 컴포넌트 ts 파일]
+
+{% highlight java linenos%}
+  <app-login (sendEvent)="getEvent($event)"></app-login>
+{%endhighlight%}
+

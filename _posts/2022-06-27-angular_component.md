@@ -106,3 +106,21 @@ EventEmitter import , OUTPUT 뎈토레이터 선언 , 이벤트 emit
   <app-login (sendEvent)="getEvent($event)"></app-login>
 {%endhighlight%}
 
+데이터 바인딩 심화  
+여러 데이터 전달 및 받기  
+[보내는 데이터 선언]  
+{% highlight java linenos%}
+  data = {'login':false, 'popClose':false};
+  this.sendEvent.emit(this.data);
+{%endhighlight%}
+
+
+[데이터 받는 부분]  
+{% highlight java linenos%}
+  getEvent(event :any){
+    console.log("get event popClose :"+event.popClose);
+    console.log("get event login :"+event.login);
+    }
+{%endhighlight%}
+
+

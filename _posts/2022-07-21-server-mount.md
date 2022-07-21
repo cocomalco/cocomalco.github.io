@@ -3,15 +3,15 @@ title:  "SERVER MOUNT"
 excerpt: "NAS 서버와 마운트 이해 및 설정"
 
 categories:
-  - Angular
+  - Server
 tags:
-  - [Angular, HTTPClient]
+  - [SERVER, NAS, MOUNT, FSTAB]
 
 toc: true
 toc_sticky: true
  
-date: 2022-07-18
-last_modified_at: 2022-07-18
+date: 2022-07-21
+last_modified_at: 2022-07-21
 
 
 ---
@@ -58,11 +58,16 @@ smb 버전을 지정하여 설정 하는 방법
 저장후 재부팅하면 /etc/fstab을 마운트 한다. 지정하지 않고 확인 하는 방법은 "mount-a"를 통해 /etc/fstab 을 마운트 하고 "df"를 통해 마운트 되었는지 확인.
 
 fstab 편집 참고
-fstab 내부에는 아래와 같은 명칭들이 있고 차례대로 입력해야 한다.
-<file system> <mount point> <type> <options><dump><pass>
+/etc/fstab은 파일시스템 정보를 저장하고있으며, 리눅스 부팅시 마운트 정보를 저장하며 , 부팅시 자동으로 적용 될수있도록 한다
 
-1. file system - 사용할 disk uuid, 원격IP/디렉토리명
-2. mount point - 물리적인 디스크를 디렉토리에 연결하기 위한 설정
+
+fstab 내부에는 아래와 같은 명칭들이 있고 차례대로 입력해야 한다.
+
+
+<file system> <mount point> <type> <options><dump><pass>
+<img src="../images/server/linux_01.JPG" />
+1. file system - 파일 시스템의 장치명을 설치하는 부분 사용할 disk uuid, 원격IP/디렉토리명
+2. mount point - 파일 시스템장치를 마운트 시킬 위치를 설정 , 물리적인 디스크를 디렉토리에 연결하기 위한 설정
 3. type - 파일 시스템 종류,  파티션 생성시 정한 파일 시스템 종류 입력
 4. options - 파일 시스템에 맞게 옵션 설정 
 (중요) 아이디와 비번은 별도의 증명 파일로 대체가능

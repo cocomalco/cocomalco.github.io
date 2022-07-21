@@ -65,13 +65,15 @@ fstab 내부에는 아래와 같은 명칭들이 있고 차례대로 입력해�
 
 
 <file system> <mount point> <type> <options><dump><pass>
-<img src="../images/server/linux_01.JPG" />
+[그림1]
+<img src="../images/server/linux_02_fstab.JPG" />
 1. file system - 파일 시스템의 장치명을 설치하는 부분 사용할 disk uuid, 원격IP/디렉토리명
 2. mount point - 파일 시스템장치를 마운트 시킬 위치를 설정 , 물리적인 디스크를 디렉토리에 연결하기 위한 설정
+[그림1] 에 마지막줄을 예를들어 /dev/mapper/centos-swap 이라는 하드디스크의 파티션 부분이있는데  이장치를 swap 이라는 디렉토리에 마운트 시키라는 의미
 3. type - 파일 시스템 종류,  파티션 생성시 정한 파일 시스템 종류 입력
 4. options - 파일 시스템에 맞게 옵션 설정 
 (중요) 아이디와 비번은 별도의 증명 파일로 대체가능
-tkdyddldb : commend 라인에서 직접적으로 표시되는게 아니라 변수 형태로 입력되기 떄문에 유출 가능성이 낮아짐 
+사용이유 : commend 라인에서 직접적으로 표시되는게 아니라 변수 형태로 입력되기 떄문에 유출 가능성이 낮아짐 
 사용자홈 , 관리자홈 등 어디엔가 파일 생성
 $ vim credentails (파일명은 자유)
 username=ID
@@ -86,3 +88,6 @@ fsck 에 의한 무결성 검사 우선순위
 2: 우선순의가 2위
 //IP/디렉토리명-/마운트할 디렉토리명-cifs-rw,user,auto,file_mode=0600,dir_mode=0700,uid='USERID',gid=root,username='ID',password='비번'-0-0
 
+확인 방법
+df -h  명령어를 이룡하여 디스크 공간 확인
+<img src="../images/server/linux_01.JPG" />

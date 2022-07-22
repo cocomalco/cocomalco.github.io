@@ -131,7 +131,7 @@ const routes: Routes = [
 ,{path:'', redirectTo:'/HOME',pathMatch:'full'}
 ,{path:'**',component:NotFoundComponent}
 ];
-{% highlight java linenos%}
+{%endhighlight%}
 
 ### Router를 통한 파라미터 참조
  1. 파라미터 전달
@@ -143,7 +143,7 @@ const routes: Routes = [
   -  routerLink 에 호출 주소와 파라미터를 넣어 컴포넌트에 전달 , UR은 http://localhost:4200/CUST/test/test_id 이다.
 {% highlight java linenos%}
 <a routerLink=“/CUST/test/test_id”>parameterTest</a> 
-{% highlight java linenos%}
+{%endhighlight%}
  
   - component에 생성한 값을 사용하여 파라미터값 사용 하며 실제 사용되는 URL 은 http://localhost:4200/CUST/test/test_id 이다.
 {% highlight java linenos%}
